@@ -1,7 +1,7 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(OUTPUT_GIF(1000));
+  pScope.output_mode(STATIC_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
@@ -10,18 +10,19 @@ function setup_pScope(pScope){
 
 function setup_layers(pScope){
 
-  new PLayer(null, 247, 203, 211);  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, 230, 222, 204);  //lets us draw the whole circle background, ignoring the boundaries
 
 
   var layer1 = new PLayer(circles);
   layer1.mode(RING);
   layer1.set_boundary( 0, 800 );
 
-  var layer2 = new PLayer(squares);
-  layer2.mode( RING );
-  layer2.set_boundary( 0, 400 );
+  var ball = new PLayer(squares);
+  ball.mode( RING );
+  ball.set_boundary( 0, 400 );
 
-}
+     rect(0,400,200,100,100)
+  }
 
 function circles(x, y, animation, pScope){
   //translate(50 * animation.frame, 0);
@@ -34,6 +35,7 @@ function circles(x, y, animation, pScope){
   ellipse(100, 600-bounce ,ballSize); 
 
 }
+
   
   function squares(x, y, animation, pScope){
 
@@ -42,7 +44,7 @@ function circles(x, y, animation, pScope){
     let backgroundArcStart = 270 - angleOffset;
     let backgroundArcEnd = 270 + angleOffset;
   
-    fill(219, 103, 124)
+    fill(255)
     arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
   
     fill(162, 232, 211)
