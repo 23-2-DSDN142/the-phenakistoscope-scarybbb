@@ -2,7 +2,7 @@ const SLICE_COUNT = 8;
 
 function setup_pScope(pScope){
   pScope.output_mode(STATIC_DISK);
-  //pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(ANIMATED_DISK);
   
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(true);
@@ -17,17 +17,18 @@ function setup_layers(pScope){
   var backG = new PLayer(circles);
   backG.mode(RING);
   backG.set_boundary( 0, 800 );
-  
+
+  var between = new PLayer(divider);
+  between.mode( RING );
+  between.set_boundary( 400, 1000 );
+
   var ball = new PLayer(squares);
   ball.mode( RING );
   ball.set_boundary( 0, 400 );
   
-  var between = new PLayer(divider);
-  between.mode( RING );
-  between.set_boundary( 400, 1000 );
- 
-
-
+  var bunnies = new PLayer(circles);
+  bunnies.mode(RING);
+  bunnies.set_boundary( 0, 800 );
      
   }
 function divider(x, y, animation, pScope){
@@ -45,10 +46,7 @@ function circles(x, y, animation, pScope){
   //scale(animation.frame*2);
   fill(162, 232, 211)
   
-  let ballSize  = 50 + (animation.wave(1)* 20)
-  let bounce = 100* animation.wave()
-  ellipse(0, 600+bounce ,ballSize); 
-  ellipse(100, 600-bounce ,ballSize); 
+
 
 }
 
