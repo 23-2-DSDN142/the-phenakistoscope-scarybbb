@@ -2,13 +2,17 @@ const SLICE_COUNT = 8;
 
 function setup_pScope(pScope){
   pScope.output_mode(STATIC_DISK);
- // pScope.output_mode(ANIMATED_DISK);
+   pScope.output_mode(ANIMATED_DISK);
   
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
+
+  pScope.load_image_sequence("bunny_jump" , "png" , 8)
+
 }
+
 
 function setup_layers(pScope){
 
@@ -21,7 +25,7 @@ function setup_layers(pScope){
   var shine = new PLayer(spotlight);
   shine.mode(RING);
   shine.set_boundary( 0, 1000 );
-
+  
   var party = new PLayer(confetti);
   party.mode(RING);
   party.set_boundary( 400, 1000 );
@@ -30,21 +34,32 @@ function setup_layers(pScope){
   roll.mode( RING );
   roll.set_boundary( 0, 1000 );
 
-  //var bunnies = new PLayer(circles);
-  //bunnies.mode(RING);
- // bunnies.set_boundary( 0, 600 );
+  var bunnies = new PLayer(bunny);
+  bunnies.mode(RING);
+  bunnies.set_boundary( 0, 1000 );
 
-
-  var film = new PLayer(outsideRing);
-  film.mode( RING );
-  film.set_boundary( 970, 1000 );  
-  }
+  var border = new PLayer(outsideRing);
+  border.mode( RING );
+  border.set_boundary( 970, 1000 );  
+  
+}
  
+
+  function bunny(x, y, animation, pScope){
+    
+    pScope.draw_image_from_sequence("bunny_jump", 0, 800, animation.frame);
+
+
+  }
+
+
   function outsideRing(x, y, animation, pScope){
     pScope.fill_background(40,31,20,255)//background
     
 
   }
+
+
 
 function divider(x, y, animation, pScope){
   rectMode(CORNER);
@@ -52,9 +67,11 @@ function divider(x, y, animation, pScope){
   rotate((360 / SLICE_COUNT)/2)
   
   fill(163,61,61)
-  triangle(0,1000 ,400,1000 ,0,0) /// maybe this is best suited being a triange? So the width stays relitive 
+  triangle(0,1000 ,400,1000 ,0,0) /// red half backg
+
 
 }
+
 
 function confetti(x, y, animation, pScope){
   
@@ -84,10 +101,14 @@ function confetti(x, y, animation, pScope){
   ellipse(600,100-animation.wave()*10,20)
   ellipse(650,400-animation.wave()*10,20)
 }
+
+
   function spotlight(x, y, animation, pScope){
     fill(265,249,176,150)
     noStroke()
-    triangle(200,0 ,400,1500,-200,0)//spotlight
+    triangle(-200,0 ,0,1500,200,0)//spotlight
+
+
 
   }
   
@@ -98,6 +119,7 @@ function confetti(x, y, animation, pScope){
     let backgroundArcEnd = 270 + angleOffset;
     console.log(int(animation.frame)%2)
     
+    strokeWeight(10)
     fill(226,215,221)
     arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); //ball white
 
