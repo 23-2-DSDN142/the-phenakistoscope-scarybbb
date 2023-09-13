@@ -1,7 +1,6 @@
 const SLICE_COUNT = 8;
 
 function setup_pScope(pScope){
-  pScope.output_mode(STATIC_DISK);
    pScope.output_mode(ANIMATED_DISK);
   
   pScope.scale_for_screen(true);
